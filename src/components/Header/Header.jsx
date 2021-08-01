@@ -1,14 +1,23 @@
+import classes from './Header.module.scss'
+
 const Header = (props) => {
   return (
-    <header className='d-flex justify-between align-center p-40'>
-      <div className='header__left d-flex align-center'>
-        <img width={40} height={40} src='/img/logo.png' alt='' />
-        <div className='header__info'>
+    <header
+      className={`${classes.header__my} d-flex justify-between align-center p-40`}>
+      <div className='d-flex align-center'>
+        <img
+          width={40}
+          height={40}
+          src='/img/logo.png'
+          alt=''
+          className='mr-10'
+        />
+        <div>
           <h3 className='text-uppercase'>Sneakers</h3>
           <p className='opacity-5'>Магазин лучших кроссовок</p>
         </div>
       </div>
-      <ul className='header__right d-flex'>
+      <ul className='d-flex'>
         <li className='mr-30'>
           <img
             width={18}

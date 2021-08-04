@@ -1,5 +1,6 @@
 .overlay {
-  position: absolute;
+  position: fixed;
+  // position: absolute;
   left: 0;
   top: 0;
   width: 100%;
@@ -31,40 +32,6 @@
 
   .items {
     flex: 1;
-  }
-
-  .cart__item {
-    border: 1px solid #f3f3f3;
-    border-radius: 20px;
-    overflow: hidden;
-    padding: 20px;
-
-    .cart__item__img {
-      height: 70px;
-      width: 70px;
-      background-size: contain;
-      background-position: 0 -3px;
-      background-repeat: no-repeat;
-      margin-right: 20px;
-    }
-    p {
-      font-size: 14px;
-      margin: 0;
-    }
-
-    b {
-      font-size: 16px;
-    }
-
-    .remove__btn {
-      opacity: 0.5;
-      cursor: pointer;
-      transition: opacity linear 0.15s;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
   }
 
   .cart__total__block {
@@ -122,5 +89,33 @@
 
   &:active {
     background: darken(#9dd558, 5%);
+  }
+}
+
+.cart__empty {
+  text-align: center;
+
+  p {
+    width: 280px;
+    line-height: 24px;
+  }
+
+  .green__button {
+    width: 245px;
+    margin-top: 20px;
+
+    &:hover {
+      img {
+        transform: rotate(180deg) translateX(3px);
+      }
+    }
+
+    img {
+      position: relative;
+      top: 1px;
+      transform: rotate(180deg);
+      margin-right: 15px;
+      transition: transform 0.15s ease-in-out;
+    }
   }
 }

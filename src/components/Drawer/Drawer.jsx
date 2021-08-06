@@ -1,7 +1,43 @@
+import React from 'react'
 import clasess from './Drawer.module.scss'
 import CartItem from './CartItems/CartItem.jsx'
+import Info from '../Info/Info.jsx'
+import { AppContext } from '../../App'
+import axios from 'axios'
 
-const Drawer = ({ onCloseCartClick, onRemoveItemFromCart, cartItems = [] }) => {
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+const Drawer = ({ onRemoveItemFromCart, cartItems = [] }) => {
+  const { onCloseCartClick, setCartItems } = React.useContext(AppContext)
+  const [orderId, setOrderId] = React.useState(null)
+  const [isOrderCompleted, setIsOrderCompleted] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false)
+
+  const onMakeOrderClick = async () => {
+    setIsLoading(true)
+    try {
+      const { data } = await axios.post(
+        'https://61090c8ed71b670017639708.mockapi.io/orders',
+        { items: cartItems }
+      )
+      setOrderId(data.id)
+      setIsOrderCompleted(true)
+      setCartItems([])
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i]
+        await axios.delete(
+          `https://61090c8ed71b670017639708.mockapi.io/cart/${item.id}`
+        )
+        await delay(1000)
+      }
+    } catch (error) {
+      alert(
+        'Во время оформления заказа произошла ошибка, пожалуйста, повторите попытку позже!'
+      )
+    }
+    setIsLoading(false)
+  }
   return (
     <div className={clasess.overlay}>
       <div className={clasess.drawer}>
@@ -43,32 +79,31 @@ const Drawer = ({ onCloseCartClick, onRemoveItemFromCart, cartItems = [] }) => {
                   <b>1074 руб.</b>
                 </li>
               </ul>
-              <button className={clasess.green__button}>
+              <button
+                disabled={isLoading}
+                className={`${clasess.green__button} ${clasess.button__loading}`}
+                onClick={onMakeOrderClick}>
                 Офромить заказ <img src='/img/arrow.svg' alt='Arrow' />
               </button>
             </div>
           </>
         ) : (
-          <div
-            className={`${clasess.cart__empty} d-flex align-center flex-column flex`}>
-            <img
-              className='mb-20'
-              width={120}
-              height={120}
-              src='/img/empty-cart.jpg'
-              alt='Cart is empty!'
-            />
-            <h2>Корзина пустая</h2>
-            <p className='opacity-6'>
-              Добавть хотя бы одну пару кроссовок, что бы сделать заказ
-            </p>
-            <button
-              className={clasess.green__button}
-              onClick={onCloseCartClick}>
-              <img src='/img/arrow.svg' alt='Arrow' />
-              Вернуться назад
-            </button>
-          </div>
+          <Info
+            imagePath={
+              isOrderCompleted
+                ? '/img/complete-order.jpg'
+                : '/img/empty-cart.jpg'
+            }
+            title={isOrderCompleted ? 'Заказ оформлен!' : 'Корзина пустая'}
+            subtitle={
+              isOrderCompleted
+                ? `Ваш заказ #${orderId} отправлен на оброботку`
+                : 'Добавть хотя бы одну пару кроссовок, что бы сделать заказ'
+            }
+            buttonImage={'/img/arrow.svg'}
+            buttonText={'Вернуться назад'}
+            onCloseCartClick={onCloseCartClick}
+          />
         )}
       </div>
     </div>

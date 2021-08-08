@@ -145,7 +145,7 @@ function App() {
         />
         <Header onCartClick={() => setCartOpened(true)} />
 
-        <Route path='favorites'>
+        <Route path={process.env.PUBLIC_URL + '/favorites'} exact>
           <Favorites
             searchValue={searchValue}
             onClearSearchClick={onClearSearchClick}
@@ -154,7 +154,7 @@ function App() {
             onAddToCart={onAddToCart}
           />
         </Route>
-        <Route path='' exact>
+        <Route path={process.env.PUBLIC_URL + '/'} exact>
           <Home
             searchValue={searchValue}
             onClearSearchClick={onClearSearchClick}
@@ -164,7 +164,7 @@ function App() {
             isLoading={isLoading}
           />
         </Route>
-        <Route path='orders' exact>
+        <Route path={process.env.PUBLIC_URL + '/orders'} exact>
           <Orders />
         </Route>
       </div>

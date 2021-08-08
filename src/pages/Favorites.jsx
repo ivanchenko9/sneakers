@@ -18,7 +18,7 @@ const Favorites = ({
           {searchValue ? `Поиск по запросу: "${searchValue}"` : 'Мои закладки'}
         </h1>
         <div className='search__block d-flex'>
-          <img src='img/search.svg' alt='Searchr' />
+          <img src='img/search.svg' alt='Search' />
           {searchValue && (
             <img
               className='clear cu-p'

@@ -10,7 +10,7 @@ const Header = (props) => {
   return (
     <header
       className={`${classes.header__my} d-flex justify-between align-center p-40`}>
-      <Link to='/'>
+      <Link to={process.env.PUBLIC_URL + '/'}>
         <div className='d-flex align-center'>
           <img
             width={40}
@@ -37,7 +37,7 @@ const Header = (props) => {
           <span>{totalPrice} руб.</span>
         </li>
         <li>
-          <Link to='/favorites'>
+          <Link to={process.env.PUBLIC_URL + '/favorites'}>
             <img
               width={18}
               height={18}
@@ -48,7 +48,7 @@ const Header = (props) => {
           </Link>
         </li>
         <li>
-          <Link to='/orders'>
+          <Link to={process.env.PUBLIC_URL + '/orders'}>
             <img
               width={18}
               height={18}

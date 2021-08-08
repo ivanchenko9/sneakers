@@ -145,7 +145,7 @@ function App() {
         />
         <Header onCartClick={() => setCartOpened(true)} />
 
-        <Route path='/favorites'>
+        <Route path='favorites'>
           <Favorites
             searchValue={searchValue}
             onClearSearchClick={onClearSearchClick}
@@ -164,7 +164,7 @@ function App() {
             isLoading={isLoading}
           />
         </Route>
-        <Route path='/orders' exact>
+        <Route path='orders' exact>
           <Orders />
         </Route>
       </div>

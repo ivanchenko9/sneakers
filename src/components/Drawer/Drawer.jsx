@@ -50,8 +50,8 @@ const Drawer = ({ onRemoveItemFromCart, cartItems = [], opened }) => {
           Корзина
           <img
             className={`${clasess.remove__btn}  cu-p `}
-            src='/img/btn-remove.svg'
-            alt='Close_cart'
+            src='img/btn-remove.svg'
+            alt='Close'
             onClick={onCloseCartClick}
           />
         </h2>
@@ -88,16 +88,14 @@ const Drawer = ({ onRemoveItemFromCart, cartItems = [], opened }) => {
                 disabled={isLoading}
                 className={`${clasess.green__button} ${clasess.button__loading}`}
                 onClick={onMakeOrderClick}>
-                Офромить заказ <img src='/img/arrow.svg' alt='Arrow' />
+                Офромить заказ <img src='img/arrow.svg' alt='Arrow' />
               </button>
             </div>
           </>
         ) : (
           <Info
             imagePath={
-              isOrderCompleted
-                ? '/img/complete-order.jpg'
-                : '/img/empty-cart.jpg'
+              isOrderCompleted ? 'img/complete-order.jpg' : 'img/empty-cart.jpg'
             }
             title={isOrderCompleted ? 'Заказ оформлен!' : 'Корзина пустая'}
             subtitle={
@@ -105,7 +103,7 @@ const Drawer = ({ onRemoveItemFromCart, cartItems = [], opened }) => {
                 ? `Ваш заказ #${orderId} отправлен на оброботку`
                 : 'Добавть хотя бы одну пару кроссовок, что бы сделать заказ'
             }
-            buttonImage={'/img/arrow.svg'}
+            buttonImage={'img/arrow.svg'}
             buttonText={'Вернуться назад'}
             onCloseCartClick={onCloseCartClick}
           />

@@ -12,7 +12,7 @@ const CartItem = ({ id, path, name, price, onRemoveItemFromCart }) => {
       </div>
       <img
         className={clasess.remove__btn}
-        src='/img/btn-remove.svg'
+        src='img/btn-remove.svg'
         alt='Remove'
         onClick={() => onRemoveItemFromCart(id)}
       />

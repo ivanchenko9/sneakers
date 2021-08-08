@@ -7,11 +7,13 @@ import axios from 'axios'
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-const Drawer = ({ onRemoveItemFromCart, cartItems = [] }) => {
+const Drawer = ({ onRemoveItemFromCart, cartItems = [], opened }) => {
   const { onCloseCartClick, setCartItems } = React.useContext(AppContext)
   const [orderId, setOrderId] = React.useState(null)
   const [isOrderCompleted, setIsOrderCompleted] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
+
+  const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0)
 
   const onMakeOrderClick = async () => {
     setIsLoading(true)
@@ -39,7 +41,10 @@ const Drawer = ({ onRemoveItemFromCart, cartItems = [] }) => {
     setIsLoading(false)
   }
   return (
-    <div className={clasess.overlay}>
+    <div
+      className={`${clasess.overlay} ${
+        opened ? clasess.overlay__visible : ''
+      }`}>
       <div className={clasess.drawer}>
         <h2 className='d-flex justify-between mb-30'>
           Корзина
@@ -71,12 +76,12 @@ const Drawer = ({ onRemoveItemFromCart, cartItems = [] }) => {
                 <li>
                   <span>Итого:</span>
                   <div></div>
-                  <b>21 498 руб.</b>
+                  <b>{totalPrice} руб.</b>
                 </li>
                 <li>
                   <span>Налог 5%:</span>
                   <div></div>
-                  <b>1074 руб.</b>
+                  <b>{Math.round(totalPrice * 0.05)} руб.</b>
                 </li>
               </ul>
               <button

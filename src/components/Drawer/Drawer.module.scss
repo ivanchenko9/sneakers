@@ -7,6 +7,20 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 1;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.overlay__visible {
+  visibility: visible;
+  opacity: 1;
+  .drawer {
+    transform: translateX(0);
+  }
+}
+.overlay__hidden {
 }
 
 .drawer {
@@ -19,6 +33,8 @@
   background: #ffffff;
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
   padding: 30px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
 
   .items {
     overflow: auto;

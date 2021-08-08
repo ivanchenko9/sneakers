@@ -1,7 +1,12 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
+import { AppContext } from '../../App.jsx'
 import classes from './Header.module.scss'
 
 const Header = (props) => {
+  const { cartItems } = React.useContext(AppContext)
+  const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0)
+
   return (
     <header
       className={`${classes.header__my} d-flex justify-between align-center p-40`}>
@@ -29,7 +34,7 @@ const Header = (props) => {
             alt='Корзина'
             className='mr-10'
           />
-          <span>1205 руб.</span>
+          <span>{totalPrice} руб.</span>
         </li>
         <li>
           <Link to='/favorites'>
@@ -43,13 +48,15 @@ const Header = (props) => {
           </Link>
         </li>
         <li>
-          <img
-            width={18}
-            height={18}
-            src='/img/user.svg'
-            alt='Пользователь'
-            className='cu-p'
-          />
+          <Link to='/orders'>
+            <img
+              width={18}
+              height={18}
+              src='/img/user.svg'
+              alt='Пользователь'
+              className='cu-p'
+            />
+          </Link>
         </li>
       </ul>
     </header>

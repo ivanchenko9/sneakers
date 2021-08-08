@@ -13,16 +13,17 @@ const Card = ({
   favorited = false,
   isLoading = false,
 }) => {
+  const itemObj = { id, parentId: id, name, price, imagePath }
   const { isItemAdded } = React.useContext(AppContext)
 
   const [isFavorite, setIsFavorite] = useState(favorited)
 
   const handlePlusButtonClick = () => {
-    onPlusButtonClick({ id, name, price, imagePath })
+    onPlusButtonClick(itemObj)
   }
 
   const handleFavoriteButtonClick = () => {
-    onFavoriteClick({ id, name, price, imagePath })
+    onFavoriteClick(itemObj)
     setIsFavorite(!isFavorite)
   }
 
@@ -45,11 +46,13 @@ const Card = ({
       ) : (
         <>
           <div className={clasess.favorite}>
-            <img
-              src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'}
-              alt={isFavorite ? 'Liked' : 'Unliked'}
-              onClick={handleFavoriteButtonClick}
-            />
+            {onFavoriteClick && (
+              <img
+                src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'}
+                alt={isFavorite ? 'Liked' : 'Unliked'}
+                onClick={handleFavoriteButtonClick}
+              />
+            )}
           </div>
           <img width='100%' height={120} src={imagePath} alt='Sneaker' />
           <h5>{name}</h5>
@@ -59,14 +62,16 @@ const Card = ({
               <span>Цена:</span>
               <b>{price} руб.</b>
             </div>
-            <img
-              className={clasess.plus}
-              src={
-                isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'
-              }
-              alt='Plus'
-              onClick={handlePlusButtonClick}
-            />
+            {onPlusButtonClick && (
+              <img
+                className={clasess.plus}
+                src={
+                  isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'
+                }
+                alt='Plus'
+                onClick={handlePlusButtonClick}
+              />
+            )}
           </div>
         </>
       )}

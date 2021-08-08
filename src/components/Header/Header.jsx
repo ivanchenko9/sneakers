@@ -37,7 +37,7 @@ const Header = (props) => {
           <span>{totalPrice} руб.</span>
         </li>
         <li>
-          <Link to={process.env.PUBLIC_URL + '/favorites'}>
+          <Link to={process.env.PUBLIC_URL + 'sneakers/favorites'}>
             <img
               width={18}
               height={18}
@@ -48,7 +48,7 @@ const Header = (props) => {
           </Link>
         </li>
         <li>
-          <Link to={process.env.PUBLIC_URL + '/orders'}>
+          <Link to={process.env.PUBLIC_URL + 'sneakers/orders'}>
             <img
               width={18}
               height={18}

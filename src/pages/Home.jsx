@@ -29,7 +29,9 @@ const Home = ({
         onFavoriteClick={(obj) => onAddToFavorite(obj)}
         onPlusButtonClick={(obj) => onAddToCart(obj)}
         //isAddedToCart={isItemAdded(item && item.id)}
-        favorited={favorites.some((obj) => Number(obj.id) === Number(item.id))}
+        favorited={favorites.some(
+          (obj) => Number(obj.parentId) === Number(item.id)
+        )}
         isLoading={isLoading}
         {...item}
       />

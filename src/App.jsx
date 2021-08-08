@@ -145,7 +145,7 @@ function App() {
         />
         <Header onCartClick={() => setCartOpened(true)} />
 
-        <Route path={process.env.PUBLIC_URL + 'sneakers/favorites'} exact>
+        <Route path={process.env.PUBLIC_URL + '/favorites'} exact>
           <Favorites
             searchValue={searchValue}
             onClearSearchClick={onClearSearchClick}
@@ -164,7 +164,7 @@ function App() {
             isLoading={isLoading}
           />
         </Route>
-        <Route path={process.env.PUBLIC_URL + 'sneakers/orders'} exact>
+        <Route path={process.env.PUBLIC_URL + '/orders'} exact>
           <Orders />
         </Route>
       </div>

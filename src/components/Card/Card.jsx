@@ -1,8 +1,8 @@
-import React from 'react'
-import ContentLoader from 'react-content-loader'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import CardContentLoader from './CardContentLoader'
 import clasess from './Card.module.scss'
-import { AppContext } from '../../App.jsx'
+import { AppContext } from '../../contexts/AppContext'
+import staticImgsAndSvgs from '../../../public/img'
 const Card = ({
   id,
   name,
@@ -30,25 +30,17 @@ const Card = ({
   return (
     <div className={clasess.card}>
       {isLoading ? (
-        <ContentLoader
-          speed={2}
-          width={150}
-          height={187}
-          viewBox='0 0 150 187'
-          backgroundColor='#f3f3f3'
-          foregroundColor='#ecebeb'>
-          <rect x='0' y='0' rx='10' ry='10' width='150' height='90' />
-          <rect x='0' y='97' rx='5' ry='5' width='150' height='15' />
-          <rect x='0' y='118' rx='5' ry='5' width='100' height='15' />
-          <rect x='0' y='154' rx='5' ry='5' width='80' height='25' />
-          <rect x='116' y='147' rx='10' ry='10' width='32' height='32' />
-        </ContentLoader>
+        <CardContentLoader />
       ) : (
         <>
           <div className={clasess.favorite}>
             {onFavoriteClick && (
               <img
-                src={isFavorite ? 'img/liked.svg' : 'img/unliked.svg'}
+                src={
+                  isFavorite
+                    ? `${staticImgsAndSvgs.liked}`
+                    : `${staticImgsAndSvgs.unliked}`
+                }
                 alt={isFavorite ? 'Liked' : 'Unliked'}
                 onClick={handleFavoriteButtonClick}
               />
@@ -66,7 +58,9 @@ const Card = ({
               <img
                 className={clasess.plus}
                 src={
-                  isItemAdded(id) ? 'img/btn-checked.svg' : 'img/btn-plus.svg'
+                  isItemAdded(id)
+                    ? `${staticImgsAndSvgs.btnChecked}`
+                    : `${staticImgsAndSvgs.btnPlus}`
                 }
                 alt='Plus'
                 onClick={handlePlusButtonClick}

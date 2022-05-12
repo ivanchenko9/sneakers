@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../components/Card/Card.jsx'
-import { AppContext } from '../App.jsx'
+import { AppContext } from '../contexts/AppContext'
+import staticImgsAndSvgs from '../../public/img'
 
 const Favorites = ({
   searchValue,
@@ -9,7 +10,8 @@ const Favorites = ({
   onAddToFavorite,
   onAddToCart,
 }) => {
-  const { favorites } = React.useContext(AppContext)
+  const { favorites, cartItems, setCartItems, setFavorites } =
+    React.useContext(AppContext)
 
   return (
     <div className='content p-40'>
@@ -18,11 +20,11 @@ const Favorites = ({
           {searchValue ? `Поиск по запросу: "${searchValue}"` : 'Мои закладки'}
         </h1>
         <div className='search__block d-flex'>
-          <img src='img/search.svg' alt='Search' />
+          <img src={`${staticImgsAndSvgs.search}`} alt='Search' />
           {searchValue && (
             <img
               className='clear cu-p'
-              src='img/btn-remove.svg'
+              src={`${staticImgsAndSvgs.btnRemove}`}
               alt='Close'
               onClick={onClearSearchClick}
             />
@@ -46,8 +48,12 @@ const Favorites = ({
               name={item.name}
               price={item.price}
               imagePath={item.imagePath}
-              onFavoriteClick={(obj) => onAddToFavorite(obj)}
-              onPlusButtonClick={(obj) => onAddToCart(obj)}
+              onFavoriteClick={(obj) =>
+                onAddToFavorite(obj, favorites, setFavorites)
+              }
+              onPlusButtonClick={(obj) =>
+                onAddToCart(obj, cartItems, setCartItems)
+              }
               favorited={true}
             />
           ))}

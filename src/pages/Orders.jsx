@@ -1,22 +1,13 @@
 import React from 'react'
 import Card from '../components/Card/Card.jsx'
-import axios from 'axios'
+import { fetchOrdersData } from '../api/index.js'
 
 const Orders = ({ onAddToFavorite, onAddToCart }) => {
   const [orders, setOrders] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
 
   React.useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true)
-      const { data } = await axios.get(
-        'https://61090c8ed71b670017639708.mockapi.io/orders'
-      )
-      setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []))
-      setIsLoading(false)
-    }
-
-    fetchData()
+    fetchOrdersData(setIsLoading, setOrders)
   }, [])
   return (
     <div className='content p-40'>

@@ -1,11 +1,9 @@
 import React from 'react'
-import { AppContext } from '../App.jsx'
+import { AppContext } from '../contexts/AppContext'
 import Card from '../components/Card/Card.jsx'
+import staticImgsAndSvgs from '../../public/img'
 
 const Home = ({
-  // items,
-  // cartItems,
-  // favorites,
   searchValue,
   onClearSearchClick,
   onSearchInputChange,
@@ -13,7 +11,8 @@ const Home = ({
   onAddToCart,
   isLoading,
 }) => {
-  const { items, favorites } = React.useContext(AppContext)
+  const { items, favorites, setCartItems, setFavorites } =
+    React.useContext(AppContext)
 
   const renderItems = () => {
     const filtredItems = items.filter((item) =>
@@ -22,13 +21,8 @@ const Home = ({
     return (isLoading ? [...Array(8)] : filtredItems).map((item, index) => (
       <Card
         key={index}
-        // id={item.id}
-        // name={item.name}
-        // price={item.price}
-        // imagePath={item.imagePath}
-        onFavoriteClick={(obj) => onAddToFavorite(obj)}
-        onPlusButtonClick={(obj) => onAddToCart(obj)}
-        //isAddedToCart={isItemAdded(item && item.id)}
+        onFavoriteClick={(obj) => onAddToFavorite(obj, favorites, setFavorites)}
+        onPlusButtonClick={(obj) => onAddToCart(obj, items, setCartItems)}
         favorited={favorites.some(
           (obj) => Number(obj.parentId) === Number(item.id)
         )}
@@ -45,11 +39,11 @@ const Home = ({
           {searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}
         </h1>
         <div className='search__block d-flex'>
-          <img src='img/search.svg' alt='Search' />
+          <img src={`${staticImgsAndSvgs.search}`} alt='Search' />
           {searchValue && (
             <img
               className='clear cu-p'
-              src='img/btn-remove.svg'
+              src={`${staticImgsAndSvgs.btnRemove}`}
               alt='Close'
               onClick={onClearSearchClick}
             />

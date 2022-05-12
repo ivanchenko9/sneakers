@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppContext } from '../../App'
+import { AppContext } from '../../contexts/AppContext'
 import clasess from './Info.module.scss'
 
 const Info = (props) => {

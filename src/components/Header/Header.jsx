@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { AppContext } from '../../App.jsx'
+import { AppContext } from '../../contexts/AppContext'
 import classes from './Header.module.scss'
+import staticImgsAndSvgs from '../../../public/img'
 
 const Header = (props) => {
   const { cartItems } = React.useContext(AppContext)
@@ -15,7 +16,7 @@ const Header = (props) => {
           <img
             width={40}
             height={40}
-            src='img/logo.png'
+            src={`${staticImgsAndSvgs.logo}`}
             alt='Logotype'
             className='mr-10'
           />
@@ -30,7 +31,7 @@ const Header = (props) => {
           <img
             width={18}
             height={18}
-            src='img/cart.svg'
+            src={`${staticImgsAndSvgs.cart}`}
             alt='Корзина'
             className='mr-10'
           />
@@ -41,7 +42,7 @@ const Header = (props) => {
             <img
               width={18}
               height={18}
-              src='img/heart.svg'
+              src={`${staticImgsAndSvgs.heart}`}
               alt='Закладки'
               className='cu-p mr-15'
             />
@@ -52,7 +53,7 @@ const Header = (props) => {
             <img
               width={18}
               height={18}
-              src='img/user.svg'
+              src={`${staticImgsAndSvgs.user}`}
               alt='Пользователь'
               className='cu-p'
             />
